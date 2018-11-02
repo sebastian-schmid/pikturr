@@ -20,6 +20,7 @@
     var swaggerUrlStr   = "" // will be filled up by code at the end of this function
     var outfileFileName = "" // either swaggerFileName + .png, or specified by the --output arg
     var formatAsPlantUml = false // output plantuml data or png diagram
+    var server = "" // plantuml server adress e.g. plantuml.com/plantuml to generate diagram on a hosted plantuml server instead of local graphviz usage
 
     // to get a printf like function in javascript you need to add it yourself!
     const str = {}
@@ -285,6 +286,8 @@
     //              default is leaf file name in the url argument
     // -u | --uml: output plant uml script in output file
     //             default is to output png diagram
+    // -s | --server plantumlServerAdress:
+    //               e.g. plantuml.com
     options.processOptions = function() {
 
         var optionsConfig = {boolean: ["u", "uml"]}
@@ -306,6 +309,10 @@
 
         if ((("u" in argv) && argv.u) || (("uml" in argv) && argv.uml)) {
             formatAsPlantUml = true
+        }
+
+        if (("server" in argv) && argv.server) {
+            server = argv.server
         }
     }
 
